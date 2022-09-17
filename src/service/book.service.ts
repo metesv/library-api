@@ -14,3 +14,22 @@ export const createBook = async (input: any) => {
   prisma.$disconnect();
   return;
 };
+
+export const borrowBook = async (input: any) => {
+  try {
+    const updateBook = await prisma.book.update({
+      where: {
+        id: parseInt(input.bookId)
+      },
+      data: {
+        readerId: parseInt(input.userId),
+        rentedDay: new Date()
+      }
+    });
+    return updateBook;
+  } catch (error) {
+    console.error(error);
+  }
+  prisma.$disconnect();
+  return;
+};
