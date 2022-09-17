@@ -12,6 +12,13 @@ datasource db {
 
 model User {
   id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  name String  @unique
+  books Book[]
+}
+
+model Book {
+  id    Int     @id @default(autoincrement())
+  name  String
+  reader    User    @relation(fields: [readerId], references: [id])
+  readerId  Int 
 }
