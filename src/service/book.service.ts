@@ -1,11 +1,10 @@
 import { PrismaClient } from '@prisma/client';
-import { UserInput } from "../models/user.model";
 
 const prisma = new PrismaClient();
 
-export const createUser = async (input: any) => {
+export const createBook = async (input: any) => {
   try {
-    const insertResult = await prisma.user.create({
+    const insertResult = await prisma.book.create({
       data: input
     });
     return insertResult;

@@ -19,6 +19,8 @@ model User {
 model Book {
   id    Int     @id @default(autoincrement())
   name  String
-  reader    User    @relation(fields: [readerId], references: [id])
-  readerId  Int 
+  reader    User?    @relation(fields: [readerId], references: [id])
+  readerId  Int?
+  rentedDay DateTime?
+  returnedDay DateTime?
 }
