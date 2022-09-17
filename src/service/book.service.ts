@@ -33,3 +33,24 @@ export const borrowBook = async (input: any) => {
   prisma.$disconnect();
   return;
 };
+
+export const returnBook = async (input: any) => {
+  const { params: { bookId, userId }, body: { score } } = input;
+  try {
+    const updateBook = await prisma.book.update({
+      where: {
+        id: parseInt(bookId)
+      },
+      data: {
+        readerId: parseInt(userId),
+        returnedDay: new Date(),
+        scores: score
+      }
+    });
+    return updateBook;
+  } catch (error) {
+    console.error(error);
+  }
+  prisma.$disconnect();
+  return;
+};

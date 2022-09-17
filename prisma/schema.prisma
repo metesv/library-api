@@ -21,6 +21,7 @@ model Book {
   name  String
   reader    User?    @relation(fields: [readerId], references: [id])
   readerId  Int?
+  scores    Int[]
   rentedDay DateTime?
   returnedDay DateTime?
 }
