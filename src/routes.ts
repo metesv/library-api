@@ -6,6 +6,7 @@ import {
 } from "./controller/user.controller";
 import { 
   getBooksHandler,
+  getBookHandler,
   createBookHandler,
   borrowBookHandler,
   returnBookHandler
@@ -29,6 +30,8 @@ function routes(app: Express) {
 
   // Book methods
   app.get("/books", getBooksHandler);
+
+  app.get("/books/:bookId", getBookHandler);
 
   app.post("/books", validateResource(createBookSchema), createBookHandler);
 }

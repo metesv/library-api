@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { Book } from '../models/book.model';
 
 const prisma = new PrismaClient();
 
@@ -10,6 +11,37 @@ export const getBooks = async () => {
         name: true
       }
     });
+    return book;
+  } catch (error) {
+    console.error(error);
+  }
+  prisma.$disconnect();
+  return;
+};
+
+export const getBook = async (input: any) => {
+  const { bookId } = input;
+  try {
+    const book: Book | null = await prisma.book.findUnique({
+      where: {
+        id: parseInt(bookId)
+      },
+      select: {
+        id: true,
+        name: true,
+        scores: true
+      }
+    });
+
+    if (book) {
+      const score = book?.scores.reduce((acc, current) => acc + current) / book?.scores.length;
+      book.score = score;
+      const { scores, ...rest } = book;
+
+      return rest;
+    }
+
+
     return book;
   } catch (error) {
     console.error(error);
@@ -60,7 +92,9 @@ export const returnBook = async (input: any) => {
       data: {
         readerId: parseInt(userId),
         returnedDay: new Date(),
-        scores: score
+        scores: {
+          push: score
+        }
       }
     });
     return updateBook;
