@@ -26,7 +26,7 @@ export async function getBookHandler(
     }
     return res.send(book);
   } catch (e: any) {
-    return res.status(409).send(e.message);
+    return res.status(400).send(e.message);
   }
 }
 
@@ -68,6 +68,6 @@ export async function returnBookHandler(
     }
     return res.send(book);
   } catch (e: any) {
-    return res.status(409).send(e.message);
+    return res.status(400).send(e.message);
   }
 }

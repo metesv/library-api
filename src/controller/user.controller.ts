@@ -50,7 +50,7 @@ export async function getUserHandler(
       throw new Error("Bad Request");
     }
   } catch (e: any) {
-    return res.status(409).send(e.message);
+    return res.status(400).send(e.message);
   }
 }
 
@@ -66,6 +66,6 @@ export async function createUserHandler(
     }
     return res.send(user);
   } catch (e: any) {
-    return res.status(409).send(e.message);
+    return res.status(400).send(e.message);
   }
 }
