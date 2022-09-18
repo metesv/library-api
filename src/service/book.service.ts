@@ -65,6 +65,16 @@ export const createBook = async (input: any) => {
 
 export const borrowBook = async (input: any) => {
   try {
+    const book = await prisma.book.findUnique({
+      where: {
+        id: parseInt(input.bookId)
+      }
+    })
+
+    if (!book?.returnedDay) {
+      return;
+    }
+
     const updateBook = await prisma.book.update({
       where: {
         id: parseInt(input.bookId)

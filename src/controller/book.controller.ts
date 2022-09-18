@@ -44,9 +44,12 @@ export async function borrowBookHandler(
 ) {
   try {
     const book = await borrowBook(req.params);
+    if (!book) {
+      throw new Error("Bad Request");    
+    }
     return res.send(book);
   } catch (e: any) {
-    return res.status(409).send(e.message);
+    return res.status(400).send(e.message);
   }
 }
 
