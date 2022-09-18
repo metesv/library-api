@@ -10,8 +10,6 @@ export const getUsers = async () => {
   } catch (error) {
     console.error(error);
   }
-  prisma.$disconnect();
-  return;
 };
 
 export const getUser = async (input: any) => {
@@ -28,8 +26,6 @@ export const getUser = async (input: any) => {
   } catch (error) {
     console.error(error);
   }
-  prisma.$disconnect();
-  return;
 };
 
 export const createUser = async (input: UserInput) => {
@@ -41,6 +37,4 @@ export const createUser = async (input: UserInput) => {
   } catch (error) {
     console.error(error);
   }
-  prisma.$disconnect();
-  return;
 };

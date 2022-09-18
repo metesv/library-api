@@ -15,8 +15,6 @@ export const getBooks = async () => {
   } catch (error) {
     console.error(error);
   }
-  prisma.$disconnect();
-  return;
 };
 
 export const getBook = async (input: any) => {
@@ -46,8 +44,6 @@ export const getBook = async (input: any) => {
   } catch (error) {
     console.error(error);
   }
-  prisma.$disconnect();
-  return;
 };
 
 export const createBook = async (input: any) => {
@@ -59,8 +55,6 @@ export const createBook = async (input: any) => {
   } catch (error) {
     console.error(error);
   }
-  prisma.$disconnect();
-  return;
 };
 
 export const borrowBook = async (input: any) => {
@@ -71,7 +65,7 @@ export const borrowBook = async (input: any) => {
       }
     })
 
-    if (!book?.returnedDay) {
+    if (!book?.returnedDay || !book) {
       return;
     }
 
@@ -90,8 +84,6 @@ export const borrowBook = async (input: any) => {
   } catch (error) {
     console.error(error);
   }
-  prisma.$disconnect();
-  return;
 };
 
 export const returnBook = async (input: any) => {
@@ -103,7 +95,7 @@ export const returnBook = async (input: any) => {
       }
     })
 
-    if (book?.returnedDay) {
+    if (book?.returnedDay || !book) {
       return;
     }
 
@@ -123,6 +115,4 @@ export const returnBook = async (input: any) => {
   } catch (error) {
     console.error(error);
   }
-  prisma.$disconnect();
-  return;
 };

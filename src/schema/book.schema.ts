@@ -31,7 +31,7 @@ export const returnBookSchema = object({
   body: object({
     score: number({
       required_error: "Score is required",
-    })
+    }).min(0).max(10)
   }),
 });
 
