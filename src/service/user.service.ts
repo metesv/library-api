@@ -14,6 +14,24 @@ export const getUsers = async () => {
   return;
 };
 
+export const getUser = async (input: any) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: parseInt(input.userId)
+      },
+      include: {
+        books: true
+      }
+    });
+    return user;
+  } catch (error) {
+    console.error(error);
+  }
+  prisma.$disconnect();
+  return;
+};
+
 export const createUser = async (input: UserInput) => {
   try {
     const insertResult = await prisma.user.create({

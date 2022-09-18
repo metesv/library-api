@@ -2,7 +2,8 @@ import { Express } from "express";
 import validateResource from "./middleware/validateResource";
 import { 
   createUserHandler,
-  getUsersHandler
+  getUsersHandler,
+  getUserHandler
 } from "./controller/user.controller";
 import { 
   getBooksHandler,
@@ -21,6 +22,8 @@ import {
 function routes(app: Express) {
   // User methods
   app.get("/users", getUsersHandler);
+
+  app.get("/users/:userId", getUserHandler);
 
   app.post("/users", validateResource(createUserSchema), createUserHandler);
 
