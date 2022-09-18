@@ -5,6 +5,7 @@ import {
   getUsersHandler
 } from "./controller/user.controller";
 import { 
+  getBooksHandler,
   createBookHandler,
   borrowBookHandler,
   returnBookHandler
@@ -25,6 +26,9 @@ function routes(app: Express) {
   app.post("/users/:userId/borrow/:bookId", validateResource(borrowBookSchema), borrowBookHandler);
 
   app.post("/users/:userId/return/:bookId", validateResource(returnBookSchema), returnBookHandler);
+
+  // Book methods
+  app.get("/books", getBooksHandler);
 
   app.post("/books", validateResource(createBookSchema), createBookHandler);
 }

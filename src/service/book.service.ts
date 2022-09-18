@@ -2,6 +2,22 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+export const getBooks = async () => {
+  try {
+    const book = await prisma.book.findMany({
+      select: {
+        id: true,
+        name: true
+      }
+    });
+    return book;
+  } catch (error) {
+    console.error(error);
+  }
+  prisma.$disconnect();
+  return;
+};
+
 export const createBook = async (input: any) => {
   try {
     const insertResult = await prisma.book.create({

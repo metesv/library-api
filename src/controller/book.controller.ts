@@ -1,6 +1,18 @@
 import { Request, Response } from "express";
 import { CreateBookInput, BorrowBookInput, ReturnBookInput } from "../schema/book.schema";
-import { createBook, borrowBook, returnBook } from "../service/book.service";
+import { createBook, borrowBook, returnBook, getBooks } from "../service/book.service";
+
+export async function getBooksHandler(
+  req: Request,
+  res: Response
+) {
+  try {
+    const book = await getBooks();
+    return res.send(book);
+  } catch (e: any) {
+    return res.status(409).send(e.message);
+  }
+}
 
 export async function createBookHandler(
   req: Request<{}, {}, CreateBookInput["body"]>,
