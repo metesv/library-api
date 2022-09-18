@@ -46,8 +46,9 @@ export async function getUserHandler(
       }
 
       return res.send(user);
+    } else {
+      throw new Error("Bad Request");
     }
-    return res.send(user);
   } catch (e: any) {
     return res.status(409).send(e.message);
   }
@@ -59,6 +60,10 @@ export async function createUserHandler(
 ) {
   try {
     const user = await createUser(req.body);
+
+    if (!user) {
+      throw new Error("Bad Request");
+    }
     return res.send(user);
   } catch (e: any) {
     return res.status(409).send(e.message);

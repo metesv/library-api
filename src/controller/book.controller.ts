@@ -20,6 +20,10 @@ export async function getBookHandler(
 ) {
   try {
     const book = await getBook(req.params);
+
+    if (!book) {
+      throw new Error("Bad Request");
+    }
     return res.send(book);
   } catch (e: any) {
     return res.status(409).send(e.message);
@@ -59,6 +63,9 @@ export async function returnBookHandler(
 ) {
   try {
     const book = await returnBook(req);
+    if (!book) {
+      throw new Error("Bad Request");    
+    }
     return res.send(book);
   } catch (e: any) {
     return res.status(409).send(e.message);
