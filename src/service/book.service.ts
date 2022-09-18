@@ -71,9 +71,11 @@ export const borrowBook = async (input: any) => {
       },
       data: {
         readerId: parseInt(input.userId),
-        rentedDay: new Date()
+        rentedDay: new Date(),
+        returnedDay: null
       }
     });
+
     return updateBook;
   } catch (error) {
     console.error(error);

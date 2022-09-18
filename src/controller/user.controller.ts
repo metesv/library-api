@@ -19,7 +19,34 @@ export async function getUserHandler(
   res: Response
 ) {
   try {
-    const user = await getUser(req.params);
+    const user: any = await getUser(req.params);
+
+    if (user) {
+      const past = user?.books.filter((item: any) => {
+        return Boolean(item.returnedDay);
+      }).map((item: any) => {
+        return {
+          id: item.id,
+          name: item.name
+        }
+      })
+
+      const present = user?.books.filter((item: any) => {
+        return !Boolean(item.returnedDay);
+      }).map((item: any) => {
+        return {
+          id: item.id,
+          name: item.name
+        }
+      })
+
+      user.books = {
+        past,
+        present
+      }
+
+      return res.send(user);
+    }
     return res.send(user);
   } catch (e: any) {
     return res.status(409).send(e.message);
