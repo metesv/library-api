@@ -1,6 +1,9 @@
-import { Express, Request, Response } from "express";
+import { Express } from "express";
 import validateResource from "./middleware/validateResource";
-import { createUserHandler } from "./controller/user.controller";
+import { 
+  createUserHandler,
+  getUsersHandler
+} from "./controller/user.controller";
 import { 
   createBookHandler,
   borrowBookHandler,
@@ -14,6 +17,9 @@ import {
 } from "./schema/book.schema";
 
 function routes(app: Express) {
+  // User methods
+  app.get("/users", getUsersHandler);
+
   app.post("/users", validateResource(createUserSchema), createUserHandler);
 
   app.post("/users/:userId/borrow/:bookId", validateResource(borrowBookSchema), borrowBookHandler);
